@@ -1,0 +1,9 @@
+.burgerContainer{
+    display: flex;
+    justify-content: center;
+    column-gap: 40px;
+}
+
+.app{
+    max-height: 100vh;
+}
