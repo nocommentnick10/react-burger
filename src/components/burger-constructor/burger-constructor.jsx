@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styles from "./burger-constructor.module.css";
 
 import {
@@ -84,7 +86,7 @@ const constructorItems = [
   },
 ];
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ onClick }) => {
   return (
     <section className="mt-25">
       <ul className={styles.constructorList}>
@@ -130,12 +132,16 @@ const BurgerConstructor = () => {
           <span className="text text_type_digits-medium mr-2">610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={onClick}>
           Оформить заказ
         </Button>
       </div>
     </section>
   );
+};
+
+BurgerConstructor.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

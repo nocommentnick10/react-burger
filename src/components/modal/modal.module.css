@@ -1,0 +1,21 @@
+.modalContainer {
+  box-sizing: border-box;
+  position: relative;
+
+  width: 720px;
+
+  display: flex;
+  flex-direction: column;
+
+  composes: pl-10 pr-10 pt-10 pb-15 from global;
+
+  visibility: hidden;
+
+  border-radius: 40px;
+  background-color: #1c1c21;
+}
+
+.modalContainerVisible{
+  composes: modalContainer;
+  visibility: visible;
+}
