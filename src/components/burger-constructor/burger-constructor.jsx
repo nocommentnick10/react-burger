@@ -1,4 +1,7 @@
-import PropTypes from "prop-types";
+import React from "react";
+
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 
 import styles from "./burger-constructor.module.css";
 
@@ -86,7 +89,17 @@ const constructorItems = [
   },
 ];
 
-const BurgerConstructor = ({ onClick }) => {
+const BurgerConstructor = () => {
+  const [isOrderVisible, setOrderVisibility] = React.useState(false);
+
+  const handleOrderDetails = () => {
+    setOrderVisibility(true);
+  };
+
+  const handleOrderModalClose = (e) => {
+    setOrderVisibility(false);
+  };
+
   return (
     <section className="mt-25">
       <ul className={styles.constructorList}>
@@ -132,16 +145,15 @@ const BurgerConstructor = ({ onClick }) => {
           <span className="text text_type_digits-medium mr-2">610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick={onClick}>
+        <Button htmlType="button" type="primary" size="large" onClick={handleOrderDetails}>
           Оформить заказ
         </Button>
       </div>
+      <Modal isVisible={isOrderVisible} onClose={handleOrderModalClose}>
+        <OrderDetails onClose={handleOrderModalClose} />
+      </Modal>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

@@ -7,11 +7,25 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import Ingredients from "../ingredients/ingredients";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingregient-details/ingredient-details";
 
 import { filterItems } from "../../utils/filterItems";
 
-const BurgerIngredients = ({ data, ...props }) => {
+const BurgerIngredients = ({ data }) => {
   const [current, setCurrent] = React.useState("bun");
+
+  const [activeId, setActiveId] = React.useState(null);
+  const [isIngredientVisible, setIngredientVisibility] = React.useState(false);
+
+  const handleActiveIngredient = (e) => {
+    setActiveId(e.nativeEvent.target.closest("li").dataset.id);
+    setIngredientVisibility(true);
+  };
+
+  const handleIngredientModalClose = (e) => {
+    setIngredientVisibility(false);
+  };
 
   const changeTab = (val) => {
     setCurrent(val);
@@ -45,7 +59,7 @@ const BurgerIngredients = ({ data, ...props }) => {
                 key={ingredient._id}
                 data-id={ingredient._id}
               >
-                {<Ingredients {...ingredient} onClick={props.onClick} />}
+                {<Ingredients {...ingredient} onClick={handleActiveIngredient} />}
               </li>
             ))}
           </ul>
@@ -59,7 +73,7 @@ const BurgerIngredients = ({ data, ...props }) => {
                 key={ingredient._id}
                 data-id={ingredient._id}
               >
-                {<Ingredients {...ingredient} onClick={props.onClick} />}
+                {<Ingredients {...ingredient} onClick={handleActiveIngredient} />}
               </li>
             ))}
           </ul>
@@ -73,12 +87,23 @@ const BurgerIngredients = ({ data, ...props }) => {
                 key={ingredient._id}
                 data-id={ingredient._id}
               >
-                {<Ingredients {...ingredient} onClick={props.onClick} />}
+                {<Ingredients {...ingredient} onClick={handleActiveIngredient} />}
               </li>
             ))}
           </ul>
         </div>
       </div>
+      <Modal
+          isVisible={isIngredientVisible}
+          onClose={handleIngredientModalClose}
+        >
+          <IngredientDetails
+            data={data}
+            activeId={activeId}
+            isVisible={isIngredientVisible}
+            onClose={handleIngredientModalClose}
+          />
+        </Modal>
     </section>
   );
 };

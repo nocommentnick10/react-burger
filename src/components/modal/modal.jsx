@@ -6,10 +6,10 @@ import styles from "./modal.module.css";
 
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
-const Modal = ({ isVisible, onClick, ...props }) => {
+const Modal = ({ isVisible, onClose, ...props }) => {
   React.useEffect(() => {
     const modalEsc = (e) => {
-      if (e.keyCode === 27) onClick();
+      if (e.keyCode === 27) onClose();
     };
     document.addEventListener("keydown", modalEsc);
 
@@ -17,7 +17,7 @@ const Modal = ({ isVisible, onClick, ...props }) => {
   });
 
   return (
-    <ModalOverlay isVisible={isVisible} onClick={onClick}>
+    <ModalOverlay isVisible={isVisible} onClose={onClose}>
       <div
         className={
           isVisible ? styles.modalContainerVisible : styles.modalContainer
@@ -32,7 +32,7 @@ const Modal = ({ isVisible, onClick, ...props }) => {
 
 Modal.propTypes = {
   isVisible: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   children: PropTypes.element.isRequired,
 };
 

@@ -11,10 +11,10 @@ import checkBackground from "../../images/orderDetails/checkBackground.svg";
 
 import { orderData } from "../../utils/orderData";
 
-const OrderDetails = ({ onClick }) => {
+const OrderDetails = ({ onClose }) => {
   return (
     <div className={styles.detailsContainer}>
-      <button className={styles.closeBtn} onClick={onClick}>
+      <button className={styles.closeBtn} onClick={onClose}>
         <CloseIcon type="primary" />
       </button>
       <h3 className="text text_type_digits-large mb-8">{orderData._id}</h3>
@@ -40,7 +40,7 @@ const OrderDetails = ({ onClick }) => {
 };
 
 OrderDetails.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default OrderDetails;

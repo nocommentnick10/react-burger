@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 
 import styles from "./modal-overlay.module.css";
 
-const ModalOverlay = ({ isVisible, onClick, ...props }) => {
+const ModalOverlay = ({ isVisible, onClose, ...props }) => {
   return (
     <div
       className={isVisible ? styles.modalOverlayVisible : styles.modalOverlay}
-      onClick={onClick}
+      onClick={onClose}
     >
       {props.children}
     </div>
@@ -15,7 +15,7 @@ const ModalOverlay = ({ isVisible, onClick, ...props }) => {
 
 ModalOverlay.propTypes = {
   isVisible: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   children: PropTypes.element.isRequired,
 };
 

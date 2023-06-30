@@ -8,7 +8,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { findActive } from "../../utils/findActive";
 
-const IngredientDetails = ({ data, activeId, isVisible, onClick }) => {
+const IngredientDetails = ({ data, activeId, isVisible, onClose }) => {
   const activeData = React.useMemo(() => {
     return findActive(data, activeId);
   }, [data, activeId]);
@@ -19,7 +19,7 @@ const IngredientDetails = ({ data, activeId, isVisible, onClick }) => {
         <div className={styles.headingWrapper}>
           <h3 className={styles.heading}>Детали ингредиента</h3>
           <button>
-            <CloseIcon type="primary" onClick={onClick} />
+            <CloseIcon type="primary" onClick={onClose} />
           </button>
         </div>
         <div className={styles.detailsContainer}>
@@ -71,7 +71,7 @@ IngredientDetails.propTypes = {
   data: PropTypes.array.isRequired,
   activeId: PropTypes.string,
   isVisible: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default IngredientDetails;
