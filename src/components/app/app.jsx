@@ -11,30 +11,38 @@ import ErrorPage from "../error/error";
 
 import { getIngredients } from "../../utils/getIngredients";
 
-const PATH = "https://norma.nomoreparties.space/api";
-
 const App = () => {
   const [data, setData] = React.useState(null);
+  const [loading, setLoad] = React.useState(true);
+  const [hasError, setError] = React.useState(false);
 
   React.useEffect(() => {
     const getData = async () => {
-        setData(await getIngredients(`${PATH}/ingredients`));
+        try{
+          const res = await getIngredients()
+          setData(res)
+          setLoad(false)
+        } catch(err) {
+          setLoad(false)
+          setError(true)
+        }
+        
     };
 
     getData();
   }, []);
 
-  if (data === null) {
+  if (loading) {
     return (
-      <Modal isVisible={true}>
+      <Modal isVisible={loading}>
         <Loader />
       </Modal>
     );
   }
 
-  if(data === undefined){
+  if(hasError){
     return (
-      <Modal isVisible={true}>
+      <Modal isVisible={hasError}>
         <ErrorPage />
       </Modal>
     )

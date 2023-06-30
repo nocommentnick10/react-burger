@@ -1,11 +1,13 @@
 import { checkRes } from "./checkRes";
 
-export const getIngredients = async (api) => {
+import { PATH } from "./constants";
+
+export const getIngredients = async () => {
   try {
-    const res = await fetch(api);
+    const res = await fetch(`${PATH}/ingredients`);
     const data = await checkRes(res);
     return data.data;
   } catch (err) {
-    console.log(err)
+    return Promise.reject(new Error(err));
   }
 };
