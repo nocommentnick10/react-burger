@@ -18,15 +18,14 @@ const App = () => {
 
   React.useEffect(() => {
     const getData = async () => {
-        try{
-          const res = await getIngredients()
-          setData(res)
-          setLoad(false)
-        } catch(err) {
-          setLoad(false)
-          setError(true)
-        }
-        
+      try {
+        const res = await getIngredients();
+        setData(res);
+        setLoad(false);
+      } catch (err) {
+        setLoad(false);
+        setError(true);
+      }
     };
 
     getData();
@@ -40,12 +39,12 @@ const App = () => {
     );
   }
 
-  if(hasError){
+  if (hasError) {
     return (
       <Modal isVisible={hasError}>
         <ErrorPage />
       </Modal>
-    )
+    );
   }
 
   return (
